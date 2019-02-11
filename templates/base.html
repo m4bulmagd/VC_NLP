@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %} - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+  <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+  <style>
+    
+    text.highlighted{
+
+      fill: red !important;
+    }
+
+  </style>
+  {% block head %}{% endblock %}
+</head>
+  <body>
+    <div class="header">
+       <div class="container">
+          <div class="row">
+             <div class="col-md-12">
+                <!-- Logo -->
+                <div class="logo text-center">
+                   <h1><a href="index.html">Visual Comparison of NLP Pipelines</a></h1>
+                </div>
+             </div>
+         </div>
+       </div>
+     </div>
+
+  <div class="page-content">
+    {% block content %}{% endblock %}
+  </div>
+
+
+<footer>
+         <div class="container">
+         
+            <div class="copy text-center">
+               TU WIEN<a href='https://www.cg.tuwien.ac.at/courses/projekte/visual-comparison-natural-language-processing-pipelines'> Institute of Visual Computing & Human-Centered Technology</a>
+            </div>
+            
+         </div>
+</footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+    {% block footer %}{% endblock %}
+
+  </body>
+</html>

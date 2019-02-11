@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<title>Les Misrables Co-occurrence</title>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='mat/style.css') }}">
+
+</head>
+<style>
+
+.background {
+  fill: #eee;
+}
+
+line {
+  stroke: #fff;
+}
+
+text.active {
+  fill: red;
+  font-size: 120%;
+}
+
+rect.highlight {
+    fill: none;
+    stroke: red;
+    stroke-width: 2;
+}
+
+</style>
+<script src="{{ url_for('static', filename='mat/d3.v3.js') }}"></script>
+<script src="{{ url_for('static', filename='mat/d3.parcoords.js') }}"></script>
+<script src="{{ url_for('static', filename='mat/science.v1.js') }}"></script>
+<script src="{{ url_for('static', filename='mat/tiny-queue.js') }}"></script>
+<script src="{{ url_for('static', filename='mat/reorder.v1.js') }}"></script>
+<script src="{{ url_for('static', filename='mat/matrix.js') }}"></script>
+
+
+<header>
+</header>
+
+
+<script>
+var margin = {top: 80, right: 0, bottom: 10, left: 80},
+    width = 720,
+    height = 720;
+
+var x = d3.scale.ordinal().rangeBands([0, width]),
+    z = d3.scale.linear().domain([0, 4]).clamp(true),
+    c = d3.scale.category10().domain(d3.range(10));
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .style("margin-left", -margin.left + "px")
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.json("{{ url_for('static', filename='mat/miserables.json') }}", loadJson);
+//https://raw.githubusercontent.com/d3/d3-plugins/master/graph/data/miserables.json
+
+</script>

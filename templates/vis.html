@@ -1,0 +1,156 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+        <meta charset="UTF-8">
+        <script src="{{ url_for('static', filename='js/tags.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/d3.v3.min.js') }}"></script>
+        <script src="{{url_for('static', filename='js/d3.layout.cloud.js') }}"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-2">
+  	<div class="sidebar content-box" style="display: block;">
+        <ul class="nav">
+            <!-- Main menu -->
+            <li class="/current">
+            	<a href="/">
+            		<i class="glyphicon glyphicon-home">
+            		</i> Dashboard
+            	</a>
+            </li>
+            
+            <li>
+            <a href="corpora">
+            	<i class="glyphicon glyphicon-list">
+            	</i> Corpora
+            </a>
+        	</li>
+        </ul>
+     </div>
+  </div>
+
+  <div class="col-md-10">
+
+
+      {% if single_chart %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-box-large">
+          <div class="panel-body" id="vis11">
+            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
+            <script type="text/javascript"> 
+              var tags11 = {{tf1|safe}}
+              run_vis("vis11" , tags11 )</script>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-box-large">
+          <div class="panel-body" id="vis12">
+            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
+            <script type="text/javascript"> 
+              var tags12 = {{tfidf1|safe}}
+              run_vis("vis12" , tags12 )</script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-box-large">
+          <div class="panel-body">
+              <p class="help-block"> Pre-processing time: {{time1[0]}} </p>              
+            <p class="help-block"> weighting time: {{time1[1]}}</p>              
+            <p class="help-block"> total time: {{time1[2]}} </p>  
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      {% else %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="content-box-large">
+          <div class="panel-body" id="vis11">
+            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
+            <script type="text/javascript"> 
+              var tags11 = {{tf1|safe}}
+              run_vis("vis11" , tags11 )</script>            
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-6">
+        <div class="content-box-large">
+          <div class="panel-body" id="vis21">
+            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
+            <script type="text/javascript">
+              var tags21 = {{tf2|safe}}
+              run_vis("vis21" , tags21 )</script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="content-box-large">
+          <div class="panel-body" id="vis12">
+            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
+            <script type="text/javascript"> 
+              var tags12 = {{tfidf1|safe}}
+              run_vis("vis12" , tags12 )</script>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-md-6">
+        <div class="content-box-large">
+          <div class="panel-body" id="vis22">
+            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
+            <script type="text/javascript">
+              var tags22 = {{tfidf2|safe}}
+              run_vis("vis22" , tags22 )</script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="content-box-large">
+        <div class="panel-body">
+            <p class="help-block"> Pre-processing time: {{time1[0]}} </p>              
+            <p class="help-block"> weighting time: {{time1[1]}}</p>              
+            <p class="help-block"> total time: {{time1[2]}} </p>  
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="content-box-large">
+          <div class="panel-body">
+            <p class="help-block"> Pre-processing time: {{time2[0]}} </p>              
+            <p class="help-block"> weighting time: {{time2[1]}}</p>              
+            <p class="help-block"> total time: {{time2[2]}} </p>  
+          </div>
+        </div>
+      </div>
+    </div>
+
+      {% endif %}
+
+
+  </div>
+</div>
+
+{% endblock %}
+
