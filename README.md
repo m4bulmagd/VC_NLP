@@ -11,3 +11,6 @@ run the app
 	export FLASK_APP=main
 	export FLASK_ENV=development
 	flask run
+
+![alt text](https://github.com/m4bulmagd/VC_NLP/blob/master/test.png)
+
