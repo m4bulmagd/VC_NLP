@@ -24,7 +24,7 @@ def pre_processing(funlist , corpus):
 	for f in funlist:
 		if f in flist:
 			_corpus = globals()[f](corpus)
-
+			
 	pre_processing_time = (time.time() - start)
 	return _corpus , pre_processing_time
 

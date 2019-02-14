@@ -22,11 +22,11 @@ def removeStops(corpus_dict , lang ='english') :
 	:return:
 	"""
 	stops = set(stopwords.words(lang))
-
+	if "The" in stops:
+		print("The removeStops")
 	for i in corpus_dict:
-
 		if isinstance(corpus_dict[i], list):
-			corpus_dict[i] = [w for w in corpus_dict[i] if not w in stops]
+			corpus_dict[i] = [w for w in corpus_dict[i] if not w.lower() in stops]
 		else:
 			raise "error removeStops "
 
@@ -83,20 +83,16 @@ def text_lemmatization(corpus_dict , lang='english'):
 	:param text:
 	:return:
 	"""
-
 	for i in corpus_dict:
 		if isinstance(corpus_dict[i], list):
 			lemma = []
 			w_lemma = WordNetLemmatizer()
 			for w in corpus_dict[i]:
-				lemma.append(w_lemma.lemmatize(w))
-			
+				lemma.append(w_lemma.lemmatize(w))	
 			corpus_dict[i] = lemma
 		else:
 			raise "error text_lemmatization "
-
 	return corpus_dict
-
 
 
 def text_stemming(corpus_dict , lang='english'):
@@ -106,7 +102,6 @@ def text_stemming(corpus_dict , lang='english'):
 	:return:
 	"""
 	for i in corpus_dict:
-
 		if isinstance(corpus_dict[i], list):
 			stemm = []
 			w_stemm = SnowballStemmer('english')

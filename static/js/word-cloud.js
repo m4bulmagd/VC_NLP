@@ -49,6 +49,7 @@ function update(tags) {
     if (tags.length){
         fontSize.domain([+tags[tags.length - 1].value || 1, +tags[0].value]);
     }
+
     layout.stop().words(tags).start();
 }
 
@@ -82,7 +83,8 @@ function draw(data, bounds) {
                 return "translate(" + [d.x, d.y] + ")";
             })
             .attr('class', function(d, i){
-                return d.text
+                console.log(d.wclass)
+                return d.wclass
             })
             .on("mouseenter", function(d,i){
 
