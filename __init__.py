@@ -3,7 +3,7 @@ from flask import Flask
 
 
 def create_app(test_config=None):
-    UPLOAD_FOLDER = '/uploads'
+    UPLOAD_FOLDER = '/uploads/'
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)

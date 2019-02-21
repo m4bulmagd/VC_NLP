@@ -26,7 +26,17 @@ def corpora():
 
 @bp.route('/processing' , methods=['POST'])
 def processing():
-	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
+	corpus_name = request.form['corpus_name']
+	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER']+corpus_name)
+	#corpus_name
+	print(corpus_url)
+	if not os.path.exists(corpus_url):
+		print(corpus_url)
+		os.makedirs(corpus_url)
+		print("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
+	else:
+		raise "ALready exist dir" 
+
 
 	if request.method == 'POST':
 		# check if the post request has the file part

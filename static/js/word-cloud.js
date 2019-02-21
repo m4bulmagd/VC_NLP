@@ -88,10 +88,10 @@ function draw(data, bounds) {
             })
             .on("mouseenter", function(d,i){
 
-                d3.selectAll('.'+d.text).classed("highlighted", true)
+                d3.selectAll('.'+d.wclass).classed("highlighted", true)
             })
             .on("mouseleave", function(d,i){
-                d3.selectAll('.'+d.text).classed("highlighted", false)
+                d3.selectAll('.'+d.wclass).classed("highlighted", false)
             })
             .style("font-size", function(d){
                 return d.size + "px";
