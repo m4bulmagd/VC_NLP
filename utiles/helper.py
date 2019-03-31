@@ -20,10 +20,13 @@ def allowed_file(filename):
 def add_word_class(tf , tfidf):
 	w_stemm = SnowballStemmer('english')
 	for term in tf:
-		term["wclass"] = w_stemm.stem(term["key"])
+		term["wclass"] = "_"+w_stemm.stem(term["key"])
+
+		
 	
 	for term in tfidf:
-		term["wclass"] = w_stemm.stem(term["key"])
+		term["wclass"] = "_"+w_stemm.stem(term["key"])
+		#term["wclass"] = w_stemm.stem(term["key"])
 
 	return tf , tfidf
 

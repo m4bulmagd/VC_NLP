@@ -34,30 +34,29 @@
 	              <thead>
 	                <tr>
 	                  <th>#</th>
-	                  <th>First Name</th>
-	                  <th>Last Name</th>
-	                  <th>Username</th>
+	                  <th>DB Name</th>
+	                  <th>Size</th>
+	                  <th>Functions</th>
 	                </tr>
 	              </thead>
+	              
 	              <tbody>
-	                <tr>
-	                  <td>1</td>
-	                  <td>Mark</td>
-	                  <td>Otto</td>
-	                  <td>@mdo</td>
-	                </tr>
-	                <tr>
-	                  <td>2</td>
-	                  <td>Jacob</td>
-	                  <td>Thornton</td>
-	                  <td>@fat</td>
-	                </tr>
-	                <tr>
-	                  <td>3</td>
-	                  <td>Larry</td>
-	                  <td>the Bird</td>
-	                  <td>@twitter</td>
-	                </tr>
+	                
+	                {% for db_name, db_size in corpora_db.items() %}
+    					
+	    				<tr>
+		                  <td>{{loop.index}}</td>
+		                  <td>{{db_name}}</td>
+		                  <td>{{db_size}}</td>
+		                  <td>
+		                  	<button class="btn btn-danger small-font" style="font-size: 9px;" value={{db_name}}>
+		                  		<i class="glyphicon glyphicon-remove" > </i> Delete
+		                  	</button>
+		                  </td>
+		                </tr>
+
+					{% endfor %}
+	              
 	              </tbody>
 	            </table>
 				</div>

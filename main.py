@@ -12,30 +12,46 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-	db = get_db()
-	corpora = db.execute('SELECT * FROM corpora').fetchall()
-	return render_template('index.html')
+	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
+	print("corpus_url")
+	corpora_db = []
+	for dir_name in os.listdir(corpus_url):
+		corpora_db.append(dir_name)
+	return render_template('index.html' , corpora_db= corpora_db)
 
 
 @bp.route('/corpora')
 def corpora():
-	db = get_db()
-	corpora = db.execute('SELECT * FROM corpora').fetchall()
-	return render_template('corpora.html')
+	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
+	print("corpus_url")
+	corpora_db = {}
+	for dir_name in os.listdir(corpus_url):
+		print(os.path.join(corpus_url , dir_name))
+		corpora_db[dir_name] = len(os.listdir(os.path.join(corpus_url , dir_name)))
+
+	print(corpora_db)
+	return render_template('corpora.html' , corpora_db= corpora_db )
 
 
 @bp.route('/processing' , methods=['POST'])
 def processing():
-	corpus_name = request.form['corpus_name']
-	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER']+corpus_name)
+	
+
+	corpus_name = request.form['new_corpus_name']
+	if corpus_name !='':
+		corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER']+corpus_name)
+	else:
+		corpus_name = request.form['selected_corpus_name']
+		corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER']+corpus_name)
+
 	#corpus_name
 	print(corpus_url)
 	if not os.path.exists(corpus_url):
 		print(corpus_url)
 		os.makedirs(corpus_url)
-		print("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
 	else:
-		raise "ALready exist dir" 
+		pass
+		#raise "ALready exist dir" 
 
 
 	if request.method == 'POST':
@@ -75,10 +91,9 @@ def processing():
 	new_tf2 , new_tfidf2  = term_limit(_tf2 , _tfidf2 , max_terms=max_terms)
 	new_tf2 , new_tfidf2  = add_word_class(new_tf2 , new_tfidf2)
 	time2 =[pre_processing_time2 ,weighting_time2 , weighting_time2+pre_processing_time2]
-	if not bool(new_tf2):
-		return render_template('vis.html' ,  tf1 = new_tf1, tfidf1=new_tfidf1 ,  time1=time1 , single_chart = True)
-		
-	return render_template('vis.html' ,  tf1 = new_tf1, tfidf1=new_tfidf1 ,tf2 = new_tf2, tfidf2=new_tfidf2, time1=time1 , time2=time2, single_chart = False)
+
+
+	return render_template('vis.html' ,  tf1 = new_tf1, tfidf1=new_tfidf1  , fns1 = fns1 ,tf2 = new_tf2, tfidf2=new_tfidf2, fns2=fns2,  time1=time1 , time2=time2, single_chart = False)
 	#return redirect(url_for('main.vis', _method='POST', tf=_tf , tfidf = _tfidf ))
 	
 @bp.route('/vis' , methods=['POST'])

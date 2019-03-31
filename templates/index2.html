@@ -3,9 +3,9 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/dist/bootstrap-tagsinput.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/tag-style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/app.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
+
 
 {% endblock %}
 
@@ -44,54 +44,30 @@
 										<legend>Inputs</legend>
 									
 										<div class="form-group">
-											
 											<label class="col-md-2 control-label">Corpus *</label>
-
-
 											<div class="col-md-3">
-												<select class="form-control form-control-sm" id="slectCorpus" name="selected_corpus_name" onchange="show_uploader();" required>
-												  	<option disabled selected value> -- select a corpus -- </option>
-												  	{% for db_name in corpora_db %}
-									                	<option value={{db_name}} > {{db_name}} </option>
-													{% endfor %}
-													<option value="upload_new" > -- upload new -- </option>
-
-												</select>
-											</div>
-											<div id="upload_new_div">
-											<label class="col-md-1 control-label"> Or Upload New</label>
-											<div class="col-md-3">
-												<input type="text" name='new_corpus_name' id="new_corpus_name" class="form-control" />
+												<input type="text" name='corpus_name'  class="form-control" required />
 												<p class="help-block">
 													choose name of the corpus.
 												</p>
 											</div>
 											<div class="col-md-3">
-												<input type="file" class="btn btn-default"  id="exampleInputFile1" name='files_input[]' webkitdirectory directory multiple />
+												<input type="file" class="btn btn-default"  id="exampleInputFile1" name='files_input[]' webkitdirectory directory multiple required />
 												<p class="help-block">
 													choose your corpus directory.
 												</p>
 											</div>
-										</div>
+
 										</div>
 											
 										<div class="form-group">
 											<label class="col-md-2 control-label">Preprocessing Steps *</label>
+											
 											<div class="col-md-5">
-										    	
-												<input type="text" id="exist-values" class="tagged form-control" data-removeBtn="true" name="fns_input1"  placeholder="Add step">
+										    	<input type="text" name="fns_input1" value="" data-role="tagsinput" class="form-control" required />
 												<p class="help-block">
 													choose preprocessing steps (*required) 
-													<div class="btn-group">
-														<button type="button" id="lowercase">lowercase</button>
-														<button type="button" id="remove_special_characters">remove_special_characters</button>
-														<button type="button" id="removeStops">removeStops</button>
-														<button type="button" id="case_folding">case_folding</button>
-														<button type="button" id="text_stemming">text_stemming</button>
-														<button type="button" id="text_lemmatization">text_lemmatization</button>
-														<button type="button" id="addArr">add all</button>
-														<button type="button" id="clear">clear tags</button>
-													</div>
+													<br>Function List: lowercase ,  remove_special_characters , removeStops  , text_lemmatization ,  case_folding , text_stemming
 												</p>
 												<div class="checkbox">
 										        	<label>
@@ -101,21 +77,9 @@
   											</div>
 
   											<div class="col-md-5">
-										    	<input type="text" id="exist-values" class="tagged2 form-control" data-removeBtn="true" name="fns_input2"  placeholder="Add step">
-
+										    	<input type="text" name="fns_input2" value="" data-role="tagsinput" class="form-control"  />
 												<p class="help-block">
 													choose other preprocessing steps to compare
-													<div class="btn-group">
-														<button type="button" id="lowercase2">lowercase</button>
-														<button type="button" id="remove_special_characters2">remove_special_characters</button>
-														<button type="button" id="removeStops2">removeStops</button>
-														<button type="button" id="case_folding2">case_folding</button>
-														<button type="button" id="text_stemming2">text_stemming</button>
-														<button type="button" id="text_lemmatization2">text_lemmatization</button>
-														<button type="button" id="addArr2">add all</button>
-														<button type="button" id="clear2">clear tags</button>
-
-													</div>
 												</p>
   											</div>
 										</div>
@@ -177,24 +141,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
 
-
     <script src="{{ url_for('static', filename='bootstrap/dist/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='bootstrap/dist/tagsinput.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/dist/bootstrap-tagsinput/bootstrap-tagsinput-angular.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/app.js') }}"></script>
      <!-- <script src="{{ url_for('static', filename='assets/app_bs3.js') }}"></script> -->
-     <script>
-		function show_uploader() {
-		  var selectBox = document.getElementById("slectCorpus");
-		  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-		  if(selectedValue == "upload_new")
-		  {
-		  	document.getElementById('upload_new_div').style.visibility = 'visible';
-		  	document.getElementById('new_corpus_name').value= '';
-
-		  }
-		  else document.getElementById('upload_new_div').style.visibility = 'hidden';
-		}
-	</script>
 
 {% endblock %}
-

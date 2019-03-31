@@ -19,14 +19,14 @@ def load_corpus(corpus_path , remove_html=True):
 
 def pre_processing(funlist , corpus):
 	flist = ['lowercase', 'remove_special_characters','removeStops' ,'text_lemmatization' , 'case_folding' , 'text_stemming']
-	_corpus = {}
+	#_corpus = {}
 	start = time.time()
 	for f in funlist:
 		if f in flist:
-			_corpus = globals()[f](corpus)
+			corpus = globals()[f](corpus)
 			
 	pre_processing_time = (time.time() - start)
-	return _corpus , pre_processing_time
+	return corpus , round(pre_processing_time , 5)
 
 
 def weighting(corpus , inverse = False):
@@ -39,7 +39,7 @@ def weighting(corpus , inverse = False):
 		_x , __xx , avr_tfidf  = tf_idf(corpus)
 
 		weighting_time = (time.time() - start)
-		return term_frequency , avr_tfidf , weighting_time
+		return term_frequency , avr_tfidf , round(weighting_time, 5)
 	else:
 		raise ValueError('Empty corpus')
 

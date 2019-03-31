@@ -83,7 +83,6 @@ function draw(data, bounds) {
                 return "translate(" + [d.x, d.y] + ")";
             })
             .attr('class', function(d, i){
-                console.log(d.wclass)
                 return d.wclass
             })
             .on("mouseenter", function(d,i){

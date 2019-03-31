@@ -35,50 +35,13 @@
   <div class="col-md-10">
 
 
-      {% if single_chart %}
-    <div class="row">
-      <div class="col-md-12">
-        <div class="content-box-large">
-          <div class="panel-body" id="vis11">
-            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
-            <script type="text/javascript"> 
-              var tags11 = {{tf1|safe}}
-              run_vis("vis11" , tags11 )</script>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="col-md-12">
-        <div class="content-box-large">
-          <div class="panel-body" id="vis12">
-            <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
-            <script type="text/javascript"> 
-              var tags12 = {{tfidf1|safe}}
-              run_vis("vis12" , tags12 )</script>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="content-box-large">
-          <div class="panel-body">
-              <p class="help-block"> Pre-processing time: {{time1[0]}} </p>              
-            <p class="help-block"> weighting time: {{time1[1]}}</p>              
-            <p class="help-block"> total time: {{time1[2]}} </p>  
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-      {% else %}
     <div class="row">
       <div class="col-md-6">
         <div class="content-box-large">
+
+          <div class="panel-heading">
+              <div class="panel-title">1st Pipelines - Term frequency</div>
+          </div>
           <div class="panel-body" id="vis11">
             <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
             <script type="text/javascript"> 
@@ -90,6 +53,13 @@
 
        <div class="col-md-6">
         <div class="content-box-large">
+          
+          <div class="panel-heading">
+              <div class="panel-title">2nd Pipelines - Term frequency</div>
+          </div>
+
+
+
           <div class="panel-body" id="vis21">
             <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
             <script type="text/javascript">
@@ -100,9 +70,14 @@
       </div>
     </div>
 
+
+
     <div class="row">
       <div class="col-md-6">
         <div class="content-box-large">
+           <div class="panel-heading">
+              <div class="panel-title">1st Pipelines - TF-IDF</div>
+          </div>
           <div class="panel-body" id="vis12">
             <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
             <script type="text/javascript"> 
@@ -114,6 +89,9 @@
 
        <div class="col-md-6">
         <div class="content-box-large">
+          <div class="panel-heading">
+              <div class="panel-title">2nd Pipelines - TF-IDF</div>
+          </div>
           <div class="panel-body" id="vis22">
             <script type="text/javascript" src="{{ url_for('static', filename='js/word-cloud.js') }}"></script>
             <script type="text/javascript">
@@ -127,7 +105,8 @@
   <div class="row">
     <div class="col-md-6">
       <div class="content-box-large">
-        <div class="panel-body">
+        <div class="panel-body"> 
+            <p class="help-block"> Steps: {{fns1}} </p>              
             <p class="help-block"> Pre-processing time: {{time1[0]}} </p>              
             <p class="help-block"> weighting time: {{time1[1]}}</p>              
             <p class="help-block"> total time: {{time1[2]}} </p>  
@@ -138,15 +117,15 @@
       <div class="col-md-6">
         <div class="content-box-large">
           <div class="panel-body">
+            <p class="help-block"> Steps: {{fns2}} </p>              
             <p class="help-block"> Pre-processing time: {{time2[0]}} </p>              
             <p class="help-block"> weighting time: {{time2[1]}}</p>              
             <p class="help-block"> total time: {{time2[2]}} </p>  
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
-      {% endif %}
 
 
   </div>
