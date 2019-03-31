@@ -12,10 +12,13 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
-	print("corpus_url")
+	upload_path = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
+	if not os.path.exists(upload_path):
+		print(upload_path)
+		os.makedirs(upload_path)
+
 	corpora_db = []
-	for dir_name in os.listdir(corpus_url):
+	for dir_name in os.listdir(upload_path):
 		corpora_db.append(dir_name)
 	return render_template('index.html' , corpora_db= corpora_db)
 
@@ -52,7 +55,6 @@ def processing():
 	else:
 		pass
 		#raise "ALready exist dir" 
-
 
 	if request.method == 'POST':
 		# check if the post request has the file part
@@ -98,16 +100,4 @@ def processing():
 	
 @bp.route('/vis' , methods=['POST'])
 def vis():
-	tf = request.args.get("tf")
 	return render_template('vis.html')
-
-
-@bp.route('/vis2')
-def vis2():
-	return render_template('test2.html')
-
-@bp.route('/mat')
-def mat():
-	return render_template('mat.html')
-
-
