@@ -40,6 +40,7 @@ def create_app(test_config=None):
     from main import main
     app.register_blueprint(main.bp)
     app.register_error_handler(404, main.page_not_found)
+    app.register_error_handler(500, main.server_error)
 
     #app.register_blueprint(blog.bp)
 

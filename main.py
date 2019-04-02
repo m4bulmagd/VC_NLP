@@ -112,4 +112,7 @@ def delete_db():
 	return redirect(url_for('main.corpora'))
 
 def page_not_found(e):
-  return render_template('404.html'), 404
+	return render_template('404.html'), 404
+
+def server_error(e):
+	return render_template('500.html'), 500
