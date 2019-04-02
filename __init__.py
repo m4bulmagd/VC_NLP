@@ -39,6 +39,8 @@ def create_app(test_config=None):
     # apply the blueprints to the app
     from main import main
     app.register_blueprint(main.bp)
+    app.register_error_handler(404, main.page_not_found)
+
     #app.register_blueprint(blog.bp)
 
     # make url_for('index') == url_for('blog.index')

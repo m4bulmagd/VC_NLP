@@ -5,6 +5,7 @@ from main.pipeline import *
 from main.utiles.helper import *
 from werkzeug.utils import secure_filename
 import os
+import shutil
 
 
 bp = Blueprint('main', __name__)
@@ -26,13 +27,10 @@ def index():
 @bp.route('/corpora')
 def corpora():
 	corpus_url = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
-	print("corpus_url")
 	corpora_db = {}
 	for dir_name in os.listdir(corpus_url):
-		print(os.path.join(corpus_url , dir_name))
 		corpora_db[dir_name] = len(os.listdir(os.path.join(corpus_url , dir_name)))
 
-	print(corpora_db)
 	return render_template('corpora.html' , corpora_db= corpora_db )
 
 
@@ -101,3 +99,17 @@ def processing():
 @bp.route('/vis' , methods=['POST'])
 def vis():
 	return render_template('vis.html')
+
+@bp.route('/delete' , methods=['POST'])
+def delete_db():
+	corpus_name = request.form['delete_db']
+	upload_path = str(os.getcwd()+current_app.config['UPLOAD_FOLDER'])
+	corpus_path	=os.path.join(upload_path , corpus_name)
+	print(corpus_path)
+	if os.path.exists(corpus_path):
+		shutil.rmtree(corpus_path)
+	
+	return redirect(url_for('main.corpora'))
+
+def page_not_found(e):
+  return render_template('404.html'), 404
